@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "aws.h": "c",
+        "wifi.h": "c",
+        "time.h": "c",
+        "led.h": "c"
+    }
+}
