@@ -154,7 +154,7 @@ void read_dht(){
   else{
     String json = "{\"device_id\":\""+DEVICE_ID+"\",\"temperature\":\""+String(t)+"\",\"humidity\":\""+String(h)+"\"}";
     char jsondata[json.length()+1];
-    json.toCharArray(jsondata,json.length());
+    json.toCharArray(jsondata,json.length()+1);
     publishSerialData(jsondata);
   }
 }
