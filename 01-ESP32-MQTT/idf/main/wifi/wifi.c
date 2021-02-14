@@ -7,10 +7,9 @@
 #include "esp_event_loop.h"
 #include "esp_log.h"
 
+#include "setup.h"
 
 
-#define WIFI_SSID "GraduaatIOT"
-#define WIFI_PASS "CloudAndSecurity101"
 
 EventGroupHandle_t wifi_event_group;
 const int CONNECTED_BIT = BIT0;
