@@ -2,14 +2,10 @@
 #include <PubSubClient.h>
 #include <DHT.h>
 #include <TaskScheduler.h>
+#include "wifi.h"
 
-
-const char* ssid = "GraduaatIOT"; // Enter your WiFi name
-const char* password =  "CloudAndSecurity101"; // Enter WiFi password
 const char* mqtt_server  = "10.54.32.1";
 const int mqtt_port  = 1883;
-//const char* mqttUser = "eapcfltj";
-//const char* mqttPassword = "3EjMIy89qzVn";
 #define MQTT_SERIAL_PUBLISH_CH "u0118137/measurement"
 #define MQTT_SERIAL_RECEIVER_CH "u0118137/led"
 const String DEVICE_ID = "u0118137";
@@ -142,9 +138,11 @@ void loop() {
 //   }
 
   runner.execute();
-   delay(10);
+  delay(10);
    
 }
+
+
 void read_dht(){
   float h = dht.readHumidity();
   float t = dht.readTemperature();
