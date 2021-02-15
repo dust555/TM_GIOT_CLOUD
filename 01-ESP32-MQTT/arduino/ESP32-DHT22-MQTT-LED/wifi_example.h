@@ -1,5 +1,3 @@
-Add the file "wifi.h" with the following content to this directory:
-
 //rename to wifi.h
 
 #ifndef WIFI_H_INCLUDE
