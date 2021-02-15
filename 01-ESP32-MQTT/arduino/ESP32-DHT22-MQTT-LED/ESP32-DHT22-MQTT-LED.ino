@@ -2,7 +2,7 @@
 #include <PubSubClient.h>
 #include <DHT.h>
 #include <TaskScheduler.h>
-#include "wifi.h"
+#include "setup.h"
 
 const char* mqtt_server  = "10.54.32.1";
 const int mqtt_port  = 1883;

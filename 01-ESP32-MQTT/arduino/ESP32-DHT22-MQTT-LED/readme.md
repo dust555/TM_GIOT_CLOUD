@@ -1,9 +1,7 @@
-Add the file "wifi.h" with the following content to this directory:
+Add the file "setup.h" with the following content to this directory:
 
-//rename to wifi.h
-
-#ifndef WIFI_H_INCLUDE
-#define WIFI_H_INCLUDE
+#ifndef SETUP_H_INCLUDE
+#define SETUP_H_INCLUDE
 
 #define ssid "<WIFI_SSID>"
 #define password "<WIFI_PASSWORD>"
