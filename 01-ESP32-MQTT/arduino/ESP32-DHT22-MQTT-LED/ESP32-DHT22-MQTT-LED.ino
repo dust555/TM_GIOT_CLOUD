@@ -4,7 +4,7 @@
 #include <TaskScheduler.h>
 #include "setup.h"
 
-const char* mqtt_server  = "10.54.32.1";
+const char* mqtt_server  = "54.229.150.108";
 const int mqtt_port  = 1883;
 #define MQTT_SERIAL_PUBLISH_CH "u0118137/measurement"
 #define MQTT_SERIAL_RECEIVER_CH "u0118137/led"
