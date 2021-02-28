@@ -1,0 +1,25 @@
+//everything in <> should be changed
+
+
+//Create a new database
+CREATE DATABASE <DATABASENAME>;
+
+//Create a new user
+CREATE USER '<USERNAME>'@'localhost' IDENTIFIED BY '<PASSWORD>';
+
+//Give user permissions on your database
+GRANT ALL PRIVILEGES ON <DATABASENAME>.* TO '<USERNAME>'@'localhost';
+FLUSH PRIVILEGES;
+
+
+//Create table
+USE <DATABASENAME>;
+
+CREATE TABLE <TABLENAME> (  
+ID INT NOT NULL AUTO_INCREMENT,  
+Device_id VARCHAR (100) NOT NULL,  
+Temperature Float,  
+Humidity Float,  
+Datetime DATETIME DEFAULT CURRENT_TIMESTAMP,
+PRIMARY KEY (ID)  
+);  
