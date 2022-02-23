@@ -1,15 +1,15 @@
-#include "secrets.h"
+#include "secrets_example.h"
 #include <WiFiClientSecure.h>
-#include <MQTTClient.h>
+#include <PubSubClient.h>
 #include <ArduinoJson.h>
-#include "WiFi.h"
+#include <WiFi.h>
 #include <DHT.h>
 #include <TaskScheduler.h>
-
+#include <string.h>
 
 
 WiFiClientSecure net = WiFiClientSecure();
-MQTTClient client = MQTTClient(256);
+PubSubClient client(net);
 
 #define LED_PIN 13
 #define DHTPIN 12
@@ -28,6 +28,8 @@ void connectAWS()
     delay(500);
     Serial.print(".");
   }
+  Serial.println("");
+  Serial.println("Wi-Fi Connected");
 
   // Configure WiFiClientSecure to use the AWS IoT device credentials
   net.setCACert(AWS_CERT_CA);
@@ -35,15 +37,19 @@ void connectAWS()
   net.setPrivateKey(AWS_CERT_PRIVATE);
 
   // Connect to the MQTT broker on the AWS endpoint we defined earlier
-  client.begin(AWS_IOT_ENDPOINT, 8883, net);
+  //client.begin(AWS_IOT_ENDPOINT, 8883, net);
+
+  client.setServer(AWS_IOT_ENDPOINT, 8883);
+  client.connect(THINGNAME);
 
   // Create a message handler
-  client.onMessage(messageHandler);
+  client.setCallback(messageHandler);
 
-  Serial.print("Connecting to AWS IOT");
+  Serial.println("Connecting to AWS IOT");
 
   while (!client.connect(THINGNAME)) {
     Serial.print(".");
+    client.connect(THINGNAME);
     delay(100);
   }
 
@@ -78,22 +84,24 @@ void publishMessage()
   client.publish(AWS_IOT_PUBLISH_TOPIC, jsonBuffer);
 }
 
-void messageHandler(String &topic, String &payload) {
+void messageHandler(char* topic, byte* payload, unsigned int length) {
   
     Serial.println("-------new message from broker-----");
     Serial.print("channel:");
     Serial.println(topic);
     Serial.print("data:");  
-    Serial.println(payload);
+    for (int i = 0; i < length; i++) {
+      Serial.print((char)payload[i]);
+    }
     Serial.println();
 
 
     //contol LED
-    if(payload == "1"){      
+    if ((char)payload[0] == '1') {   
       digitalWrite(LED_PIN,1);
       Serial.print("Turning on LED");
     }
-    else if(payload == "0"){ 
+    else if ((char)payload[0] == '0') {
       digitalWrite(LED_PIN,0);
       Serial.print("Turning off LED");
     }
