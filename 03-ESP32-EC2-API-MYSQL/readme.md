@@ -48,3 +48,31 @@ certbot --apache
 ## https webserver testen
 - https webadres ingeven in browser
 
+## aanmaken database en tabel in mysql
+Ga in de mysql cli
+```
+sudo mysql
+```
+- gebruik het bestand sql.txt om een databank, gebruiker en tabel aan te maken
+
+## connectie met mysql testen
+- wijzig de gegevens in het bestand connect.php
+- plaats het bestand connect.php en test.php in /var/www/html
+- plaats de bestanden mockapi.php, api.php en list.php in /var/www/html
+- mockapi.php zal een random waarde in de databank zetten wanneer je deze pagina opent
+- list.php toont de inhoud van de databank
+
+## ESP temperatuur in databank
+- voeg een https endpoint toe aan de rule die luistert naar jouw topic
+- voeg in het https endpoint het webadres naar api.php
+- voeg bij headers alle velden die je publiceert in de vorm van: Key: Temperature, Value: ${temperature}
+- Bevestig het https endpoint door de code op te zoeken in de apache logfiles: /var/log/apache2/access.log
+```
+tail /var/log/apache2/access.log
+```
+
+## test
+- open de pagina list.php om te kijken of je 
+
+## troubleshoot
+- indien de waarden niet binnen komen kan je bij je rule een error actie toevoegen. Voeg bijvoorbeeld s3 bucket toe om de error messages te zien
