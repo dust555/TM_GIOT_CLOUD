@@ -56,9 +56,10 @@ sudo mysql
 - gebruik het bestand sql.txt om een databank, gebruiker en tabel aan te maken
 
 ## connectie met mysql testen
-- wijzig de gegevens in het bestand connect.php
-- plaats het bestand connect.php en test.php in /var/www/html
+- wijzig de gegevens in het bestand secrets.php
+- plaats het bestand secrets.php mysql_connect.php en test.php in /var/www/html
 - plaats de bestanden mockapi.php, api.php en list.php in /var/www/html
+- Wijzig de tabelnaam in mockapi.php, api.php en list.php naar de naam van jouw tabel
 - mockapi.php zal een random waarde in de databank zetten wanneer je deze pagina opent
 - list.php toont de inhoud van de databank
 
@@ -66,7 +67,7 @@ sudo mysql
 - voeg een https endpoint toe aan de rule die luistert naar jouw topic
 - voeg in het https endpoint het webadres naar api.php
 - voeg bij headers alle velden die je publiceert in de vorm van: Key: Temperature, Value: ${temperature}
-- Bevestig het https endpoint door de code op te zoeken in de apache logfiles: /var/log/apache2/access.log
+- Bevestig het https endpoint (onder menupunt Act - Destinations) door de token op te zoeken in de apache logfiles: /var/log/apache2/access.log
 ```
 tail /var/log/apache2/access.log
 ```
@@ -75,4 +76,8 @@ tail /var/log/apache2/access.log
 - open de pagina list.php om te kijken of je 
 
 ## troubleshoot
+- pas in het bestand /etc/php/7.4/apache2/php.ini de lijn "display_errors = off" naar "display_errors = on". Herstart apache met het volgende commando
+```
+sudo systemctl restart apache2
+```
 - indien de waarden niet binnen komen kan je bij je rule een error actie toevoegen. Voeg bijvoorbeeld s3 bucket toe om de error messages te zien
